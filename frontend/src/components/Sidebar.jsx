@@ -19,6 +19,11 @@ const Sidebar = () => {
           Add Student
         </NavLink>
         <NavLink 
+          to="/add-classroom" 
+          className={({ isActive }) => isActive ? "block py-2.5 px-4 bg-gray-700 rounded text-white font-semibold" : "block py-2.5 px-4 text-gray-300 hover:bg-gray-700 rounded"}>
+          Add Classroom
+        </NavLink>
+        <NavLink 
           to="/assign-teacher" 
           className={({ isActive }) => isActive ? "block py-2.5 px-4 bg-gray-700 rounded text-white font-semibold" : "block py-2.5 px-4 text-gray-300 hover:bg-gray-700 rounded"}>
           Assign Teacher

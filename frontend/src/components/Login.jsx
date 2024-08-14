@@ -112,20 +112,18 @@ const Login = ({ setCurrentUser }) => {
             const response = await axios.post('http://localhost:5000/api/auth/signin', { email, password, role });
             if (response.data.success) {
                 const { token, user } = response.data;
-
-                // Calculate expiration time (3 days from now)
-                const expiryTime = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // 3 days in milliseconds
-
+    
+                const expiryTime = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);  
                 localStorage.setItem('token', JSON.stringify({ token, expiry: expiryTime }));
                 setCurrentUser(user);
+    
 
-                // Redirect based on user role
                 if (user.role === 'Principal') {
                     navigate('/dashboard/principal');
                 } else if (user.role === 'Teacher') {
-                    navigate('/dashboard/teacher');
+                    navigate(`/dashboard/teacher/${user.id}`);
                 } else if (user.role === 'Student') {
-                    navigate('/dashboard/student');
+                    navigate(`/dashboard/student/${user.id}`);
                 }
             } else {
                 setError(response.data.message);

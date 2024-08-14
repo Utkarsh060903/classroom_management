@@ -1,7 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const TeacherSidebar = () => {
+  const { teacherId } = useParams(); 
   return (
     <div className="h-screen bg-gray-800 text-white w-64">
       <div className="p-4">
@@ -22,7 +23,7 @@ const TeacherSidebar = () => {
         </NavLink>
         
         <NavLink 
-          to="/teacher/students-list" 
+          to={`/teacher/${teacherId}/students`}
           className={({ isActive }) => isActive ? "block py-2.5 px-4 bg-gray-700 rounded text-white font-semibold" : "block py-2.5 px-4 text-gray-300 hover:bg-gray-700 rounded"}>
           Student List
         </NavLink>

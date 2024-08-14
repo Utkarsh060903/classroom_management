@@ -1,8 +1,8 @@
 import express from 'express'
-import { getStudentsInClassroom } from '../controllers/studentInClassroom.js'
+import { getStudentsInTeachersClassroom } from '../controllers/studentInClassroom.js'
 
 const studentsInClassroomRouter = express.Router()
 
-studentsInClassroomRouter.get('/classroom-students' , getStudentsInClassroom)
+studentsInClassroomRouter.get('/teacher/:teacherId/students' , getStudentsInTeachersClassroom)
 
 export default studentsInClassroomRouter

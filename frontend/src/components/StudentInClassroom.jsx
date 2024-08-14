@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const StudentsInClassroomList = () => {
+  const { teacherId } = useParams();
   const [students, setStudents] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -9,30 +11,26 @@ const StudentsInClassroomList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const token = localStorage.getItem('token'); // Get the JWT token from localStorage
-
-        const response = await axios.get('http://localhost:5000/api/teacher/classroom-students', {
-          headers: {
-            'x-auth-token': token, // Attach the token to the request headers
-          },
-        });
-
-        if (response.data.success) {
-          setStudents(response.data.students);
-          setError('');
-        } else {
-          setError(response.data.message);
-        }
+        const response = await axios.get(`http://localhost:5000/api/teacher/${teacherId}/students`);
+        setStudents(response.data);
       } catch (err) {
-        console.error(err);
-        setError('An error occurred while fetching the students.');
+        setError('Error fetching students');
       } finally {
         setLoading(false);
       }
     };
 
     fetchStudents();
-  }, []);
+  }, [teacherId]);
+
+  const handleDelete = async (studentId) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/teacher/${teacherId}/students/${studentId}`);
+      setStudents(students.filter(student => student._id !== studentId));
+    } catch (err) {
+      setError('Error deleting student');
+    }
+  };
 
   if (loading) return <div>Loading...</div>;
 
@@ -53,6 +51,9 @@ const StudentsInClassroomList = () => {
               <th className="py-3 px-6 border-b text-left bg-gray-100 font-semibold">
                 Email
               </th>
+              <th className="py-3 px-6 border-b text-left bg-gray-100 font-semibold">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -62,11 +63,18 @@ const StudentsInClassroomList = () => {
                   <td className="py-3 px-6 border-b text-left">{student._id}</td>
                   <td className="py-3 px-6 border-b text-left">{student.name}</td>
                   <td className="py-3 px-6 border-b text-left">{student.email}</td>
+                  <td className="py-3 px-6 border-b text-left">
+                    <button 
+                      onClick={() => handleDelete(student._id)}
+                      className="text-red-500 hover:text-red-700">
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="3" className="py-3 px-6 border-b text-center">
+                <td colSpan="4" className="py-3 px-6 border-b text-center">
                   No students found
                 </td>
               </tr>

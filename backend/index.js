@@ -9,6 +9,8 @@ import studentRouter from './routes/studentRoute.js'
 import teacherRouter from './routes/teacherRoute.js'
 import classroomListRouter from './routes/classroomListRoute.js'
 import studentsInClassroomRouter from './routes/studentInClassroom.js'
+import deleteStudentRouter from './routes/deleteStudentRouter.js'
+import studentDetailsRouter from './routes/studentDetailsRouter.js'
 
 dotenv.config()
 
@@ -25,7 +27,9 @@ app.use('/api/classrooms', classroomRouter)
 app.use('/api' , studentRouter)
 app.use('/api' , teacherRouter)
 app.use('/api' , classroomListRouter)
-app.use('/api/teacher' , studentsInClassroomRouter)
+app.use('/api' , studentsInClassroomRouter)
+app.use('/api' , deleteStudentRouter)
+app.use('/api' , studentDetailsRouter)
 
 const PORT = 5000
 

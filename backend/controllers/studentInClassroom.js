@@ -1,31 +1,29 @@
-import Student from '../models/studentModel.js';
-import Teacher from '../models/teacherModel.js'; // Assuming there's a Teacher model
+import User from '../models/userModel.js'; 
 
-export const getStudentsInClassroom = async (req, res) => {
+const getStudentsInTeachersClassroom = async (req, res) => {
   try {
-    // Fetch the teacher's ID from the authenticated user (stored in req.user after auth middleware)
-    // console.log("utkarsh" , req)
-    const teacherId = req.user._id;
+    const { teacherId } = req.params;
 
-    // Fetch the teacher's classroomId from the Teacher model
-    const teacher = await Teacher.findById(teacherId).populate('classroom');
-    
+    const teacher = await User.findById(teacherId).populate('classroom');
+
     if (!teacher) {
-      return res.status(404).json({ success: false, message: 'Teacher not found' });
+       res.json({ message: 'Teacher not found' });
     }
 
-    const classroomId = teacher.classroom._id;
-
-    // Fetch students who belong to this classroom
-    const students = await Student.find({ classroom: classroomId });
-
-    if (!students.length) {
-      return res.status(404).json({ success: false, message: 'No students found in this classroom' });
+    if (teacher.role !== 'Teacher') {
+      res.json({ message: 'User is not a teacher' });
     }
 
-    res.json({ success: true, students });
+    const students = await User.find({ classroom: teacher.classroom._id, role: 'Student' });
+
+    if (!students || students.length === 0) {
+      return res.status(404).json({ message: 'No students found in this classroom' });
+    }
+
+    res.status(200).json(students);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Server error' });
+    res.json({ message: 'Server error', error: error.message });
   }
 };
+
+export {getStudentsInTeachersClassroom}

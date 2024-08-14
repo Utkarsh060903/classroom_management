@@ -40,7 +40,6 @@ const signin = async (req, res) => {
 
     try {
         const user = await User.findOne({ email }).populate('classroom'); // Populate classroom details
-        console.log(user)
         if (!user) {
             return res.status(401).json({ success: false, message: 'Invalid email or password' });
         }

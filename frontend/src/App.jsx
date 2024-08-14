@@ -17,6 +17,7 @@ import ClassroomList from './components/ClassroomList'
 
 import { decodeToken, isTokenExpired } from './utils/auth'
 import StudentsInClassroomList from './components/StudentInClassroom';
+import StudentDetails from './components/StudentDetails';
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -40,7 +41,7 @@ const App = () => {
           <Route path='/login' element={<Login setCurrentUser={setCurrentUser} />} />
           <Route path='/dashboard/principal' element={<PrincipalDashboard />} />
           <Route path='/dashboard/student' element={<StudentDashboard />} />
-          <Route path='/dashboard/teacher' element={<TeacherDashboard />} />
+           <Route path="/dashboard/teacher/:teacherId" element={<TeacherDashboard />} />
           <Route path='/add-teacher' element={<TeacherForm />} />
           <Route path='/add-classroom' element={<ClassroomForm />} />
           <Route path='/add-student' element={<StudentForm />} />
@@ -49,7 +50,9 @@ const App = () => {
           <Route path='/teachers-list' element={<TeacherList />} />
           <Route path='/students-list' element={<StudentList />} />
           <Route path='/classroom-list' element={<ClassroomList />} />
-          <Route path='/teacher/students-list' element={<StudentsInClassroomList />} />
+          <Route path='/teacher/:teacherId/students' element={<StudentsInClassroomList />} />
+          <Route path='/dashboard/student/:studentId' element={<StudentDashboard />} />
+          <Route path='/student/:studentId/classroom-students' element={<StudentDetails />} />
         </Routes>
       </div>
     </div>
