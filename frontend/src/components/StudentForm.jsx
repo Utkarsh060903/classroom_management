@@ -24,7 +24,6 @@ const StudentForm = () => {
         if (response.ok) {
           const data = await response.json();
           alert('Teacher added successfully!');
-          // Optionally clear the form after submission
           setFormData({
             name: '',
             email: '',

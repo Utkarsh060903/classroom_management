@@ -5,9 +5,9 @@ const Navbar = ({ currentUser, setCurrentUser }) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem('token'); // Remove the token from local storage
-        setCurrentUser(null); // Reset the currentUser state
-        navigate('/'); // Redirect to the home page
+        localStorage.removeItem('token');
+        setCurrentUser(null); 
+        navigate('/'); 
     };
 
     return (

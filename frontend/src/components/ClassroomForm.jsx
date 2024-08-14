@@ -31,7 +31,6 @@ const ClassroomForm = () => {
 
       if (response.status === 200) {
         alert("Classroom added successfully!");
-        // Optionally clear the form after submission
         setFormData({
           name: "",
           startTime: "",

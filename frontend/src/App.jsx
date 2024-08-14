@@ -23,11 +23,9 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Restore user state from localStorage
     const tokenData = JSON.parse(localStorage.getItem('token'));
     if (tokenData && !isTokenExpired()) {
-      // Decode token to get user info if needed
-      const user = decodeToken(tokenData.token); // Implement decodeToken function based on your JWT
+      const user = decodeToken(tokenData.token); 
       setCurrentUser(user);
     }
   }, []);

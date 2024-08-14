@@ -39,7 +39,7 @@ const signin = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const user = await User.findOne({ email }).populate('classroom'); // Populate classroom details
+        const user = await User.findOne({ email }).populate('classroom'); 
         if (!user) {
             return res.status(401).json({ success: false, message: 'Invalid email or password' });
         }
@@ -58,7 +58,7 @@ const signin = async (req, res) => {
                 id: user._id, 
                 name: user.name, 
                 role: user.role,
-                classroom: user.classroom ? user.classroom.name : null // Include classroom name if assigned
+                classroom: user.classroom ? user.classroom.name : null
             } 
         });
     } catch (err) {

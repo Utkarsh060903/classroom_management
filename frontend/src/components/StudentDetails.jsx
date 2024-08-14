@@ -11,12 +11,11 @@ const StudentDetails = () => {
   useEffect(() => {
     const fetchStudentDetails = async () => {
       try {
-        // Fetch student details
         const studentResponse = await axios.get(`http://localhost:5000/api/students/${studentId}/students`);
         setStudents(studentResponse.data);
       } catch (err) {
         setError('Error fetching students');
-        console.error(err); // Log the error for debugging
+        console.error(err); 
       } finally {
         setLoading(false);
       }

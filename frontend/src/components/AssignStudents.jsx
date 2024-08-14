@@ -22,7 +22,6 @@ const AssignStudent = () => {
         if (response.ok) {
           const data = await response.json();
           alert('student added successfully!');
-          // Optionally clear the form after submission
           setFormData({
            studentId: "",
            classroomId: ""
