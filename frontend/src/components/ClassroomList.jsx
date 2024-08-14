@@ -9,7 +9,7 @@ const ClassroomList = () => {
   useEffect(() => {
     const fetchClassrooms = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/classroom-list");
+        const response = await axios.get("https://classroom-management-4-3fxk.onrender.com/api/classroom-list");
         if (response.data.success) {
           setClassrooms(response.data.classrooms);
           setError("");

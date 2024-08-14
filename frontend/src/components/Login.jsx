@@ -12,7 +12,7 @@ const Login = ({ setCurrentUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signin', { email, password, role });
+            const response = await axios.post('https://classroom-management-4-3fxk.onrender.com/api/auth/signin', { email, password, role });
             if (response.data.success) {
                 const { token, user } = response.data;
     

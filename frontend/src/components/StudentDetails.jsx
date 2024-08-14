@@ -11,7 +11,7 @@ const StudentDetails = () => {
   useEffect(() => {
     const fetchStudentDetails = async () => {
       try {
-        const studentResponse = await axios.get(`http://localhost:5000/api/students/${studentId}/students`);
+        const studentResponse = await axios.get(`https://classroom-management-4-3fxk.onrender.com/api/students/${studentId}/students`);
         setStudents(studentResponse.data);
       } catch (err) {
         setError('Error fetching students');

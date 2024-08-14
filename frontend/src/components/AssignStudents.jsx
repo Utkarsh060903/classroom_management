@@ -17,7 +17,7 @@ const AssignStudent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('http://localhost:5000/api/classrooms/assign-students', formData)
+        const response = await axios.post('https://classroom-management-4-3fxk.onrender.com/api/classrooms/assign-students', formData)
   
         if (response.ok) {
           const data = await response.json();
